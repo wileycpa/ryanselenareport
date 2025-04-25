@@ -124,19 +124,7 @@
           { category: 'Utilities', amount: 1618.67 },
           { category: 'Total Operating Expenses', amount: 122881.45 }
         ],
-        otherIncome: [
-          { category: 'Interest Income', amount: 656.95 },
-          { category: 'Loss on Disposal', amount: -2589.77 },
-          { category: 'Total Other Income', amount: -1932.82 }
-        ],
-        otherExpenses: [
-          { category: 'Amortization Expense', amount: 1276.86 },
-          { category: 'Depreciation Expense', amount: 10101.95 },
-          { category: 'Total Other Expenses', amount: 11378.81 }
-        ],
-        netOperatingIncome: 28841.20,
-        netOtherIncome: -13311.63,
-        netIncome: 15529.57
+        netIncome: 28841.20 // Total Income - Total Operating Expenses
       },
       keyMetrics: {
         netIncome: 186354.88,
@@ -261,6 +249,61 @@
               </Recharts.BarChart>
             </Recharts.ResponsiveContainer>
           </div>
+
+          <div className="section">
+            <h2>Monthly Budget for 2025 (Profit and Loss Format)</h2>
+            <p>Below is the monthly budget for 2025, prepared in a Profit and Loss format based on 2024 data, assuming even distribution across the year. The monthly net income is projected at $28,841.20.</p>
+            <h3>Income</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {financialData.monthlyBudget.income.map(item => (
+                  <tr key={item.category}>
+                    <td>{item.category}</td>
+                    <td className="positive">${item.amount.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <h3>Expenses</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                {financialData.monthlyBudget.expenses.map(exp => (
+                  <tr key={exp.category}>
+                    <td>{exp.category}</td>
+                    <td className="negative">-${exp.amount.toLocaleString()}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+            <h3>Net Income</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Category</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Net Income</td>
+                  <td className="positive">${financialData.monthlyBudget.netIncome.toLocaleString()}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
       );
     };
 
